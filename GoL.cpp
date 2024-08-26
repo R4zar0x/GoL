@@ -8,8 +8,8 @@
 #define SETTINGS_EDIT_SIZE  6
 #define TEMPLATE_EDIT_SIZE  3
 
-#define FLASHER_VERTICAL    1
-#define FLASHER_HORIZONTAL  2
+#define BLINKER_VERTICAL    1
+#define BLINKER_HORIZONTAL  2
 #define GLIDER_0            3
 #define GLIDER_90           4
 #define GLIDER_180          5
@@ -663,8 +663,8 @@ static BOOL     validateGridSizeForSpawn(HWND hWnd, INT size);
 
 static void     writeCursorPos(HWND hWnd, POINT& CursorPos);
 
-static void     setFlasherVertical  (Grid* grid, POINT pt);
-static void     setFlasherHorizontal(Grid* grid, POINT pt);
+static void     setBlinkerVertical  (Grid* grid, POINT pt);
+static void     setBlinkerHorizontal(Grid* grid, POINT pt);
 
 static void     setGlider0  (Grid* grid, POINT pt);
 static void     setGlider90 (Grid* grid, POINT pt);
@@ -867,7 +867,7 @@ static void     writeCursorPos(HWND hWnd, POINT& CursorPos)
     ScreenToClient(hWnd, &CursorPos);
 }
 
-static void     setFlasherVertical(Grid* grid, POINT pt)
+static void     setBlinkerVertical(Grid* grid, POINT pt)
 {
     for (LONG i = 0; i < 3; i++)
     {
@@ -881,7 +881,7 @@ static void     setFlasherVertical(Grid* grid, POINT pt)
     grid->setCell(pt.x + 1, pt.y + 1, 1);
     grid->setCell(pt.x + 1, pt.y + 2, 1);
 }
-static void     setFlasherHorizontal(Grid* grid, POINT pt)
+static void     setBlinkerHorizontal(Grid* grid, POINT pt)
 {
     for (LONG i = 0; i < 3; i++)
     {
@@ -1682,7 +1682,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         }
             break;
             // Structures
-        case ID_SETFLASHER_VERTICAL:
+        case ID_SETBLINKER_VERTICAL:
         {
             if (runEvolution)
             {
@@ -1693,10 +1693,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 break;
             }
 
-            structID = FLASHER_VERTICAL;
+            structID = BLINKER_VERTICAL;
         }
         break;
-        case ID_SETFLASHER_HORIZONTAL:
+        case ID_SETBLINKER_HORIZONTAL:
         {
             if (runEvolution)
             {
@@ -1707,7 +1707,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                 break;
             }
 
-            structID = FLASHER_HORIZONTAL;
+            structID = BLINKER_HORIZONTAL;
         }
         break;
         case ID_SETGLIDER_ROTATE0GRAD:
@@ -1959,14 +1959,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         {
             switch (structID)
             {
-            case FLASHER_VERTICAL:
+            case BLINKER_VERTICAL:
             {
-                setFlasherVertical(fild->getGrid(), mousePosition);
+                setBlinkerVertical(fild->getGrid(), mousePosition);
             }
                 break;
-            case FLASHER_HORIZONTAL:
+            case BLINKER_HORIZONTAL:
             {
-                setFlasherHorizontal(fild->getGrid(), mousePosition);
+                setBlinkerHorizontal(fild->getGrid(), mousePosition);
             }
                 break;
             case GLIDER_0:
